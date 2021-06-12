@@ -13,7 +13,7 @@ This App Uses Python==3.9.5, Django==3.2.3, papy==1.0.8.
 
 ```sh
 $ git clone https://github.com/alii76tt/youtube-video-downloader
-$ cd youtube_downloader
+$ cd youtube-video-downloader
 $ pip install -r requirements.txt
 $ python manage.py runserver
 ```
