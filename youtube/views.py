@@ -5,6 +5,8 @@ from django.http import FileResponse
 from pytube import YouTube
 #To download YouTube content and get metadata
 import pafy
+# remove self._dislikes = self._ydl_info['dislike_count'] KeyError: 'dislike_count'
+#Youtube does no longer have a dislike count, they simply removed it.
 
 
 # Create your views here.
