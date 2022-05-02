@@ -1,170 +1,182 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="YouTube is the fastest youtube video downloader. The best youtube online video downloader free in HD, Convert youtube videos to mp3 and mp4 with YouTube downloader.">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="YouTube is the fastest youtube video downloader. The best youtube online video downloader free in HD, Convert youtube videos to mp3 and mp4 with YouTube downloader.">
+  <meta name="keywords" content="YouTube is the fastest youtube video downloader. The best youtube online video downloader free in HD, Convert youtube videos to mp3 and mp4 with YouTube downloader.">
 
-    <title>YouTube Video Downloader</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="shortcut icon" href="https://cdn-icons.flaticon.com/png/512/5483/premium/5483896.png?token=exp=1650571390~hmac=e0592481f5d3d815d718140e12c03c19" type="image/x-icon">
+  <style>
+    @import url(https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,200;0,400;1,300&display=swapp);
 
-    <style>
-        body{
-            font-family: "Poppins";
-        }
+    body {
+      background-color: black;
+      font-family: 'Josefin Sans', sans-serif;
+      color: white;
+    }
 
-        .url-box {
-            background: #041d70;
-            border-radius: 3px;
-        }
-        a{
-            color: black;
-            text-decoration: none;
-        }
-        a:hover{
-            color: red;
-        }
-    </style>
+    h1 {
+      color: #f00;
+      text-decoration: hsl(165.8, 74.4%, 44.5%) double underline 5px;
+      text-shadow: 4px 0 0 #0010ff;
+    }
+    .btn{
+      box-shadow: 0 8px 16px 0 rgba(163, 3, 255, 0.2), 0 6px 20px 0 rgba(224, 7, 7, 0.19);
+      border-radius: 12px;
+      font-weight: 900;
+      color: #960FF2;
+    }
+    a {
+      text-decoration: none;
+    }
+
+    th {
+      background-color: #fd7e14;
+    }
+  </style>
+
+  <title>YouTube Video & Audio Downloader</title>
 </head>
-    <body>
-        <nav class="navbar navbar-dark bg-primary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="{% url 'home' %}">
-                <img src="https://dwglogo.com/wp-content/uploads/2020/05/1200px-YouTube_logo.png" alt="" width="70" height="55" class="d-inline-block align-text">
-                YouTube Video Downloader
-              </a>
-              
-              <div class="d-flex">
-              <a class="navbar-brand" href="https://github.com/alii76tt">
-                <span class="navbar-text">
-                    by @alii76tt
-                </span>
-              </a>  
-              </div>
-            </div>
-        </nav>
 
-          <div class="container">
-              <div class="row justify-content-center text-lg-center">
-                <div   class="col-md-8 mt-4 p-3">
-                    <a class="navbar-brand" href="{% url 'home' %}">
-                      <h3>YouTube Video <span class="badge bg-danger">Downloader</span></h3>
-                    </a>
-                    <span>Download and save YouTube videos for free</span>
-                </div>
-                 <a href="https://github.com/alii76tt" style="text-align: center">
-                  <button class="btn btn-dark btn-lg mt-3" type="submit" target="new">
-                 Source Code
-                  </button> 
-                </a>                       
-              </div>
+<body>
+  
+<div class="container d-flex justify-content-center mt-5 text-light">
+  <div class="col-md-12 mx-auto">
+    <a href="/"><h1 class="text-center display-4 fst-italic rounded font-monospace">YouTube Video & Audio Downloader</h1></a>
+    
+    {% if error %}
+        <div class="alert alert-danger text-center mt-5 display-6">
+            {{error}}
+        </div>
+    {% endif %}
 
-              <section class="url-box py-5 mt-3 shadow-lg">
-                <div class="container text-center h5">
-                    <form method="POST">
-                     {% csrf_token %}
-                        <div class="form-floating mb-3">
-                            <input name="link" type="text" class="form-control" id="exampleInputEmail1" placeholder="Please paste video URL here" required="">
-                            <label for="exampleInputEmail1">Please paste video URL here</label>
-                        </div>
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <button class="btn btn-success btn-lg" type="submit">Search</button>  
-                        </div>
-                    </form>
-                </div>
-            </section>
-            {% if video %}
-            <div class="bd-example mt-5 shadow-lg">
-                <div class="card mb-3 border-light bg-transparent border-2" >
-                  <div class="row g-0">
-                    <div class="col-md-4 p-3">
-                      <iframe width="100%" height="250" src="{{ embedlink }}"></iframe>
-                    </div>
-                    <div class="col-md-8 mt-5 text-center">
-                      <div class="card-body">
-                        <h4 class="card-title"><small class="text-muted lead"><em>Video Title: </em></small><a href="{{ video.watchv_url }}">{{ title }}</a></h4>
-                        <h5 class="card-text mt-5 mb-5"><small class="text-muted lead"><em>Channel Name: </em></small>{{ author }}</h5>
-                        <p class="card-text"><small class="text-muted lead"><em>Time: {{ duration }}</em></small></p>
-                      </div>
-                    </div>
+    <form method="POST" class="mt-3">
+        {% csrf_token %}
+        <div class="form-floating mb-3 mt-5">
+            {{form.url}}
+            <label for="floatingInput" class="text-dark">Url</label>
+        </div>
+      <div class="d-flex justify-content-center">
+        <button type="buton" class="btn btn-danger btn-lg mt-3 text-light" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa-solid fa-circle-down"></i> Download</button>
+      </div>
+    </form>
+    <div class="d-flex justify-content-center">
+      <a href="https://github.com/alii76tt/django-youtube-clone" class="btn btn-info btn-lg mt-3 text-light"><i class="fa-solid fa-code"></i> Source Code</a>
+    </div>
+
+    <div class="container">
+        {% if isVideo %}
+        <div class="bd-example mt-5 shadow-lg">
+            <div class="card mb-3 border-light bg-transparent border-2 text-light" >
+              <div class="row g-0">
+                <div class="col-md-4 p-3">
+                  <div class="img-thumb">
+                    <img class="img-responsive" src="{{ image }}" width="%100" height="auto">
                   </div>
                 </div>
-                <small class="text-muted lead p-3"><em>Video</em></small>
-                <table class="table text-center">
-                  <thead>
-                    <tr>
-                      <th scope="col">Quality</th>
-                      <th scope="col">File Size</th>
-                      <th scope="col">Download</th>
-                    </tr>
-                  </thead>
-                  {% for video in video.streams %}
-                  <tbody>
-                    <tr>
-                      <th scope="row">{{video.quality }}</th>
-                      <td>{{ video.get_filesize|filesizeformat }}</td>
-                      <td><a href="{{ video.url }}" target="new" > <button type="button" class="btn btn-success ">Download</button></a></td>
-                    </tr>
-                  </tbody>
-                  {% endfor %}
-                </table>
-
-                <table class="table text-center">
-                    <small class="text-muted lead p-3"><em>Audio</em></small>
-                  <thead>
-                    <tr>
-                      <th scope="col">Quality</th>
-                      <th scope="col">File Size</th>
-                      <th scope="col">Download</th>
-                    </tr>
-                  </thead>
-                  {% for audio in video.audiostreams %}
-                  <tbody>
-                    <tr>
-                      <th scope="row">{{ audio.quality }}</th>
-                      <td>{{ audio.get_filesize|filesizeformat }}</td>
-                      <td><a href="{{ audio.url }}" target="new" > <button type="button" class="btn btn-success ">Download</button></a></td>
-                    </tr>
-                  </tbody>
-                  {% endfor %}
-                </table>
-            {% endif %}
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h4 class="card-title"><small class="text-muted lead">Video Title: </small><a target="_blank" href="{{ url }}" class="text-warning">{{ title }}</a></h4>
+                    <h5 class="card-text"><small class="text-muted lead">Channel Name: </small>{{ channel }}</h5>
+                    <p class="card-text"><small class="text-muted lead">Duration: </small>{{ duration }}</p>
+                    <p class="card-text"><small class="text-muted lead">Views: </small>{{ views }} <i class="fa-solid fa-eye"></i></p>
+                    <p class="card-text"><small class="text-muted lead">Likes: </small>{{ likes }} <i class="fa-solid fa-thumbs-up"></i></p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        <div class="card p-3 mt-3">
-        <figure class="p-3 mb-0">
-          <blockquote class="blockquote">
-            <p>How to Download Youtube Videos?</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-muted">
-            Copy and Paste YouTube URL into the search box, then click "Search" button. Choose the File Format & Video Quality, then click "Download" button
-          </figcaption>
-        </figure>
-      </div>
-        <div class="card p-3">
-        <figure class="p-3 mb-0">
-          <blockquote class="blockquote">
-            <p>Free YouTube Video Downloader</p>
-          </blockquote>
-          <figcaption class="blockquote-footer mb-0 text-muted">
-             You can easily download thousands of YouTube videos in high quality formats like 360p, 720p (HD), 1080p (Full HD).
-          </figcaption>
-        </figure>
-      </div>
+            <div class="container-lg text-center">
+              <small class="lead p-3"><h1>Video</h1></small>
+            <table class="table text-light">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Resolution</th>
+                  <th scope="col">Extension</th>
+                  <th scope="col">File Size</th>
+                  <th scope="col">Download</th>
+                </tr>
+              </thead>
+              {% for video in streams %}
+              <tbody>
+                <tr>
+                  <td scope="row">{{video.resolution }} ({{video.itemFormat}}) </td>
+                  <td>{{ video.extension }}</td>
+                  <td>{{ video.file_size|filesizeformat }}</td>
+                  <td><a download href="{{video.url}}" class="btn"
+                    target="_blank" style="color: 960FF2;">Download <i
+                    class=" fa fa-download"></i></a></td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
 
-       <footer class="mt-1 py-2 bg-dark text-center ">
-            <div class="container">
-                <span class="text-muted">YouTube Video Downloader</span> <br>
-                <span  class="text-muted"><a href="https://github.com/alii76tt">Source Code </a></span>
+            <table class="table text-light">
+                <small class="lead p-3"><h1>Audio</h1></small>
+              <thead>
+                <tr>
+                  <th scope="col">Resolution</th>
+                  <th scope="col">Extension</th>
+                  <th scope="col">File Size</th>
+                  <th scope="col">Download</th>
+                </tr>
+              </thead>
+              {% for audio in audioStreams %}
+              <tbody>
+                <tr>
+                  <td scope="row">{{audio.resolution }} ({{audio.itemFormat}}) </td>
+                  <td>{{ audio.extension }}</td>
+                  <td>{{ audio.file_size|filesizeformat }}</td>
+                  <td><a href="{{audio.url}}" download="" class="btn"
+                    target="_blank">Download <i
+                    class=" fa fa-download"></i></a></td>
+                </tr>
+              </tbody>
+              {% endfor %}
+            </table>
             </div>
-        </footer>
+            
+        {% endif %}
+    </div>
+  </div>
+</div>
 
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-    </body>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please Wait!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-primary alert-dismissible fade show" role="alert" style="font-size: medium;">
+          <i class="fa-solid fa-file-arrow-down"></i>
+          <strong>Please Wait!</strong> The process may take a long time.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+</body>
+
 </html>

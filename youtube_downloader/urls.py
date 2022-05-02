@@ -19,6 +19,8 @@ from youtube import views
 
 
 urlpatterns = [
-    path('', views.youtube_download, name='home'),
+    path('', views.index, name='home'),
     path('admin/', admin.site.urls),
 ]
+
+handler404 = "youtube_downloader.views.page_not_found_view"
